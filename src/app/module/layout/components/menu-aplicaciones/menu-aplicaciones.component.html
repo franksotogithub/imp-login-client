@@ -1,0 +1,25 @@
+<div class="content">
+
+
+
+    <div class="grid">
+
+        <div class="lg:col-4 md:col-6 p-card" *ngFor="let app of aplicaciones" [style]="{'margin': '1em','cursor':'pointer','text-align':'center'}">
+          <a href="{{app.sisUrl}}?token={{session.token}}&sis_id={{app.sisId}}&prf_id={{app.prfId}}">
+            <img alt="Card"  src="data:image/png;base64,{{app.sisLogotipo}}"  ></a>
+            <!--<img alt="Card" src="data:image/png;base64,{{app.sisLogotipo}}"  ></a>-->
+
+
+
+            <h1>{{app.sisNombre |uppercase}}</h1>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>

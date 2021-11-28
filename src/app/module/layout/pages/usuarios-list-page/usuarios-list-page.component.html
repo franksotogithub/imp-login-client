@@ -1,0 +1,113 @@
+<div class="content ">
+
+  <p-card>
+    <div class="col-12">
+      <h1>Lista  de Usuarios</h1>
+
+    </div>
+
+
+    <p-table #dt [value]="usuarios"   styleClass="p-datatable-customers" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+    [paginator]="true" currentPageReportTemplate="Viendo {first} hasta {last} de {totalRecords} registros"
+    [filterDelay]="0" [globalFilterFields]="['usuEmail','perNombre1','perApellido1']">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+
+
+
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Global Search" />
+
+            </span>
+            <button
+            pButton
+            type="button"
+            label="Agregar"
+            icon="pi pi-plus"
+            class="p-button-primary p-button-rounded mr-2 mb-2"
+            (click)="crear()"
+            >
+            </button>
+
+
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+
+          <th pSortableColumn="usuEmail">Email <p-sortIcon field="sisNombre"></p-sortIcon></th>
+          <th pSortableColumn="perNombre1">Nombres <p-sortIcon field="sisUrl"></p-sortIcon></th>
+          <th pSortableColumn="perApellido1">Apellidos <p-sortIcon field="sisUrl"></p-sortIcon></th>
+          <th pSortableColumn="insNombreAbrev">Institucion<p-sortIcon field="insNombreAbrev"></p-sortIcon></th>
+          <th pSortableColumn="usuUltimoAcceso">Ultimo Acceso <p-sortIcon field="sisUrl"></p-sortIcon></th>
+
+          <th ></th>
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-usuario>
+      <tr >
+        <td>{{ usuario.usuEmail  }}</td>
+        <td>{{ usuario.perNombre1  }} {{ usuario.perNombre2  }}</td>
+
+        <td>{{ usuario.perApellido1 }} {{ usuario.perApellido2  }}</td>
+        <td>{{ usuario.insNombreAbrev}}</td>
+        <td>{{ usuario.usuUltimoAcceso| date: 'dd/MM/yyyy hh:mm:ss'   }}</td>
+        <td>
+          <button
+          pButton
+          type="button"
+          label=""
+          icon="pi pi-pencil"
+          class="p-button-warning p-button-rounded mr-2 mb-2"
+          (click)="actualizar(usuario)"
+          >
+
+          </button>
+
+          <button
+          pButton
+          (click)="eliminar(usuario)"
+          class="p-button-danger p-button-rounded p-mr-2 mb-2"
+          icon="pi pi-trash"
+
+        ></button>
+        </td>
+      </tr>
+
+    </ng-template>
+  </p-table>
+
+
+
+  </p-card>
+
+  </div>
+
+
+
+  <p-confirmDialog #cd [style]="{ width: '50vw' }">
+    <ng-template pTemplate="header">
+      <h3>Eliminar Usuario</h3>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <button
+        type="button"
+        class="p-button-outlined p-button-danger"
+        pButton
+        icon="pi pi-times"
+        label="Cancelar"
+        (click)="cd.reject()"
+      ></button>
+      <button
+        type="button"
+        class="p-button-success"
+        pButton
+        icon="pi pi-check"
+        label="Aceptar"
+        (click)="cd.accept()"
+      ></button>
+    </ng-template>
+  </p-confirmDialog>

@@ -1,0 +1,170 @@
+<div class="content ">
+
+  <p-card>
+
+
+
+
+      <div class="col-12">
+        <h1>Lista  de Perfiles</h1>
+
+
+
+      </div>
+
+
+      <div class="col-12 " >
+        <label for ="">Elija el sistema:</label>
+        <p-dropdown
+        [options]="sistemas"
+        [(ngModel)]="sistema"
+        optionLabel="sisNombre"
+        optionValue="sisId"
+        placeholder="Seleccione un sistema"
+        (ngModelChange)="onChangeSistema($event)"
+
+      ></p-dropdown>
+      </div>
+
+      <p-table #dt [value]="perfiles"   styleClass="p-datatable-customers" [rowHover]="true"
+      [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+      [paginator]="true" currentPageReportTemplate="Viendo {first} hasta {last} de {totalRecords} registros"
+      [filterDelay]="0" [globalFilterFields]="['prfNombre']">
+      <ng-template pTemplate="caption">
+
+
+        <br>
+          <div class="table-header">
+
+
+
+              <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Global Search" />
+
+              </span>
+              <button
+              pButton
+              type="button"
+              label="Agregar"
+              icon="pi pi-plus"
+              class="p-button-primary p-button-rounded mr-2 mb-2"
+              (click)="crearPerfil()"
+              >
+              </button>
+
+
+          </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+
+            <th pSortableColumn="prfNombre">Nombre Perfil <p-sortIcon field="prfNombre"></p-sortIcon></th>
+            <th ></th>
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-perfil>
+        <tr>
+          <td>{{ perfil.prfNombre }}</td>
+
+
+          <td>
+            <button
+            pButton
+            type="button"
+            label=""
+            icon="pi pi-pencil"
+            class="p-button-warning p-button-rounded mr-2 mb-2"
+            (click)="actualizarPerfil(perfil)"
+            >
+
+            </button>
+
+            <button
+            pButton
+            (click)="eliminarPerfil(perfil)"
+            class="p-button-danger p-button-rounded p-mr-2 mb-2"
+            icon="pi pi-trash"
+
+          ></button>
+          </td>
+        </tr>
+
+      </ng-template>
+      </p-table>
+
+
+
+
+
+</p-card>
+</div>
+
+
+
+
+<p-dialog [(visible)]="display">
+  <ng-template pTemplate="header">
+      {{titlePerfil}}
+  </ng-template>
+  <div class="grid" *ngIf="perfil">
+    <div class="field col-12">
+      <label >
+        Nombre
+      </label>
+
+      <input
+      type="text"
+      pInputText
+
+      class="inputfield w-full"
+      [(ngModel)]="perfil.prfNombre"
+      />
+
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button
+    type="button"
+    class="p-button-outlined p-button-danger"
+    pButton
+    icon="pi pi-times"
+    label="Cancelar"
+    (click)="display=false"
+  ></button>
+  <button
+    type="button"
+    class="p-button-success"
+    pButton
+    icon="pi pi-check"
+    label="Aceptar"
+    (click)="savePerfil()"
+  ></button>
+  </ng-template>
+</p-dialog>
+
+
+<p-confirmDialog #cd [style]="{ width: '50vw' }">
+  <ng-template pTemplate="header">
+    <h3>{{title}}</h3>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      type="button"
+      class="p-button-outlined p-button-danger"
+      pButton
+      icon="pi pi-times"
+      label="Cancelar"
+      (click)="cd.reject()"
+    ></button>
+    <button
+      type="button"
+      class="p-button-success"
+      pButton
+      icon="pi pi-check"
+      label="Aceptar"
+      (click)="cd.accept()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>

@@ -1,0 +1,674 @@
+<div class="content"  >
+  <p-card *ngIf="usuarioModel && personaModel">
+    <h2>{{title}}</h2>
+
+
+
+
+    <form [formGroup]="usuarioFormGroup"   *ngIf="usuarioFormGroup && !isEdit" >
+      <div class="formgrid  grid">
+
+        <div class="col-12">
+
+          <h3>Datos de Usuario:</h3>
+        </div>
+
+
+
+        <div class="field col-12">
+          <label>Email:</label>
+
+          <input
+          type="email"
+
+          pInputText
+          formControlName="usuEmail"
+          class="inputfield w-full"
+          [(ngModel)]="usuarioModel.usuEmail"
+          />
+          <small
+          class="text-danger"
+          *ngIf="
+          usuarioFormGroup.controls['usuEmail']?.errors
+          "
+
+        >
+          {{ usuarioFormGroup.controls['usuEmail'].errorMessage }}</small
+        >
+        </div>
+
+
+        <div class="field col-12" >
+          <label>Contraseña:</label>
+
+          <input
+
+          type="password"
+          pInputText
+          formControlName="usuContrasenia"
+          class="inputfield w-full"
+          [(ngModel)]="usuarioModel.usuContrasenia"
+          />
+
+          <small
+          class="text-danger"
+          *ngIf="
+          usuarioFormGroup.controls['usuContrasenia']?.errors
+          "
+        >
+          {{ usuarioFormGroup.controls['usuContrasenia'].errorMessage }}</small
+        >
+
+        </div>
+
+        <div class="field col-12">
+          <label>Cofirmar Contraseña:</label>
+
+          <input
+
+          type="password"
+          pInputText
+          formControlName="usuContrasenia2"
+          class="inputfield w-full"
+          [(ngModel)]="usuarioModel.usuContrasenia2"
+          />
+          <small
+          class="text-danger"
+          *ngIf="usuarioFormGroup.controls['usuContrasenia2']?.errors"
+
+
+        >
+          {{ usuarioFormGroup.controls['usuContrasenia2'].errorMessage }}</small
+        >
+
+        </div>
+
+
+
+
+        <div class="field col-12">
+          <label>Distrito:</label>
+
+          <p-dropdown
+          formControlName="ubigeo"
+          [options]="distritos"
+          [(ngModel)]="usuarioModel.ubigeo"
+          optionLabel="disNombre"
+          placeholder="Seleccione un distrito"
+          optionValue="disUbigeo"
+          [style]="{'width':'100%'}"
+
+
+        ></p-dropdown>
+        </div>
+
+        </div>
+    </form>
+
+    <form [formGroup]="usuarioUpdateFormGroup"   *ngIf="usuarioUpdateFormGroup && isEdit" >
+      <div class="formgrid  grid">
+
+        <div class="col-12">
+
+          <h3>Datos de Usuario:</h3>
+        </div>
+
+
+
+        <div class="field col-12">
+          <label>Email:</label>
+
+          <input
+          type="email"
+
+          pInputText
+          formControlName="usuEmail"
+          class="inputfield w-full"
+          [(ngModel)]="usuarioModel.usuEmail"
+
+          />
+
+          <small
+          class="text-danger"
+          *ngIf="
+          usuarioUpdateFormGroup.controls['usuEmail']?.errors
+          "
+        >
+          {{ usuarioUpdateFormGroup.controls['usuEmail'].errorMessage }}</small
+        >
+
+
+        </div>
+
+
+        <div class="field grid col-12" >
+
+
+          <label for="firstname4" class="col-12 mb-2 md:col-2 md:mb-0">Cambiar Contraseña  </label>
+        <div class="col-12 md:col-10">
+          <button  pButton
+          label="Cambiar Contraseña"
+          (click)="changePassword()"
+          class="p-button-secundary  mr-2 mb-2"></button>
+        </div>
+
+
+        </div>
+
+        <div class="field col-12">
+          <label>Distrito:</label>
+
+          <p-dropdown
+          formControlName="ubigeo"
+          [options]="distritos"
+          [(ngModel)]="usuarioModel.ubigeo"
+          optionLabel="disNombre"
+          placeholder="Seleccione un distrito"
+          optionValue="disUbigeo"
+          [style]="{'width':'100%'}"
+
+
+        ></p-dropdown>
+        </div>
+
+        </div>
+    </form>
+
+
+
+
+    <form [formGroup]="personaFormGroup" *ngIf="personaFormGroup" >
+      <div class="formgrid  grid">
+        <div class="col-12">
+
+          <h3>Datos personales:</h3>
+        </div>
+
+
+
+
+        <div class="field col-12">
+          <label  >Nombres:</label>
+
+          <input
+
+          type="text"
+          pInputText
+          formControlName="perNombre1"
+          class="inputfield w-full"
+          [(ngModel)]="personaModel.perNombre1"
+          />
+
+          <small
+          class="text-danger"
+          *ngIf="
+          personaFormGroup.controls['perNombre1']?.errors
+          "
+        >
+          {{ personaFormGroup.controls['perNombre1'].errorMessage }}</small
+        >
+        </div>
+
+
+        <div class="field col-12">
+          <label >Apellido Paterno:</label>
+
+          <input
+
+          type="text"
+          pInputText
+          formControlName="perApellido1"
+          class="inputfield w-full"
+          [(ngModel)]="personaModel.perApellido1"
+          />
+
+          <small
+          class="text-danger"
+          *ngIf="
+          personaFormGroup.controls['perApellido1']?.errors
+          "
+        >
+          {{ personaFormGroup.controls['perApellido1'].errorMessage }}</small
+        >
+        </div>
+
+
+        <div class="field col-12">
+          <label>Apellido Materno:</label>
+
+          <input
+
+          type="text"
+          pInputText
+          formControlName="perApellido2"
+          class="inputfield w-full"
+          [(ngModel)]="personaModel.perApellido2"
+          />
+
+          <small
+          class="text-danger"
+          *ngIf="
+          personaFormGroup.controls['perApellido2']?.errors
+          "
+        >
+          {{ personaFormGroup.controls['perApellido2'].errorMessage }}</small
+        >
+        </div>
+
+
+
+        <div class="field col-12">
+          <label>Numero Documento:</label>
+
+          <input
+          impOnlyNumber
+          type="text"
+          pInputText
+          formControlName="perNroDoc"
+          class="inputfield w-full"
+          [(ngModel)]="personaModel.perNroDoc" maxlength="12"
+          />
+
+
+          <small
+          class="text-danger"
+          *ngIf="
+          personaFormGroup.controls['perNroDoc']?.errors
+          "
+        >
+          {{ personaFormGroup.controls['perNroDoc'].errorMessage }}</small
+        >
+        </div>
+
+
+
+
+        <div class="field col-12">
+          <label>Telefono:</label>
+
+          <input
+          impOnlyNumber
+          type="text"
+          pInputText
+          formControlName="perTelefono1"
+          class="inputfield w-full"
+          [(ngModel)]="personaModel.perTelefono1" maxlength="15"
+          />
+
+
+
+          <small
+          class="text-danger"
+          *ngIf="
+          personaFormGroup.controls['perTelefono1']?.errors
+          "
+        >
+          {{ personaFormGroup.controls['perTelefono1'].errorMessage }}</small
+        >
+        </div>
+
+        <div class="field col-12">
+          <label for="institucion">Institucion:</label>
+          <p-dropdown
+          id="institucion"
+          [options]="instituciones"
+          [(ngModel)]="personaModel.insId"
+          formControlName="insId"
+          class="inputfield "
+          optionLabel="insRazonSocial"
+          placeholder="Seleccione una institucion"
+          optionValue="insId"
+          (ngModelChange)="changeInstitucion($event)"
+          [style]="{'width':'100%'}"
+        ></p-dropdown>
+        <small
+        class="text-danger"
+        *ngIf="
+        personaFormGroup.controls['insId']?.errors
+        "
+      >
+        {{ personaFormGroup.controls['insId'].errorMessage }}</small
+      >
+        </div>
+
+        <div class="field col-12">
+          <label >Gerencia:</label>
+          <p-dropdown
+          formControlName="gerId"
+          [options]="gerencias"
+          [(ngModel)]="personaModel.gerId"
+          optionLabel="gerNombre"
+          class="inputfield "
+
+          placeholder="Seleccione una gerencia"
+          optionValue="gerId"
+          [style]="{'width':'100%'}"
+          (ngModelChange)="changeGerencia($event)"
+
+        ></p-dropdown>
+
+        </div>
+
+
+        <div class="field col-12">
+          <label for="institucion">Sub Gerencia:</label>
+          <p-dropdown
+
+          [options]="subgerencias"
+
+          [(ngModel)]="personaModel.sgeId"
+          class="inputfield"
+          optionLabel="sgeNombre"
+          formControlName="sgeId"
+          placeholder="Seleccione una sub gerencia"
+          optionValue="sgeId"
+          [style]="{'width':'100%'}"
+        ></p-dropdown>
+
+        </div>
+
+
+
+        </div>
+    </form>
+
+
+    <div class="grid">
+      <div class="col-12">
+
+        <h3>Accesos:</h3>
+      </div>
+
+
+
+
+      <div class="field col-12">
+
+
+    <p-table #dt [value]="usuarioPerfiles"   styleClass="p-datatable-customers" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+    [paginator]="true" currentPageReportTemplate="Viendo {first} hasta {last} de {totalRecords} registros"
+    [filterDelay]="0" >
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+
+
+            <button
+            pButton
+            type="button"
+            label="Agregar"
+            icon="pi pi-plus"
+            class="p-button-primary p-button-rounded mr-2 mb-2"
+            (click)="crearAcceso()"
+            >
+            </button>
+
+
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+
+          <th pSortableColumn="sisNombre">Sistema <p-sortIcon field="sisNombre"></p-sortIcon></th>
+          <th pSortableColumn="prfNombre">Rol <p-sortIcon field="prfNombre"></p-sortIcon></th>
+
+          <th ></th>
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-perfil let-rowIndex="rowIndex">
+      <tr>
+        <td>{{ perfil.sisNombre  }}</td>
+        <td>{{ perfil.prfNombre  }} </td>
+
+
+        <td>
+
+          <button
+          pButton
+          (click)="eliminarAcceso(perfil,rowIndex)"
+          class="p-button-danger p-button-rounded p-mr-2 mb-2"
+          icon="pi pi-trash"
+
+        ></button>
+        </td>
+      </tr>
+
+    </ng-template>
+  </p-table>
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+ <div class="flex justify-content-between">
+        <button
+        pButton
+        label="Guardar"
+        (click)="saveUsuario()"
+        type="submit"
+
+        class="p-button-primary"
+        [disabled]="!usuarioValid || !personaValid"
+      ></button>
+
+      <button
+      pButton
+      label="Regresar"
+      (click)="regresar()"
+      class="p-button-secundary"
+
+    ></button>
+      </div>
+
+
+  </p-card>
+
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<p-dialog [(visible)]="display" [style]="{'width':'50%'}" [contentStyle]="{'overflow':'visible'}">
+  <ng-template pTemplate="header">
+      {{titlePerfil}}
+  </ng-template>
+  <!--<div class="form-grid grid" *ngIf="usuarioPerfil">-->
+    <div class="form-grid grid" *ngIf="usuarioPerfil">
+    <div class="field col-12">
+      <label>
+        Sistema:
+      </label>
+      <p-dropdown
+      [options]="sistemas"
+      [(ngModel)]="sistema"
+      optionLabel="sisNombre"
+      placeholder="Seleccione el sistema"
+      [ngModelOptions]="{ standalone: true }"
+      (ngModelChange)="onChangeSistema($event)"
+      [style]="{'width':'100%'}"
+    ></p-dropdown>
+
+
+
+
+
+
+    </div>
+
+    <div class="field col-12">
+      <label>
+        Rol:
+      </label>
+      <p-dropdown
+      [options]="perfiles"
+      [(ngModel)]="usuarioPerfil"
+      optionLabel="prfNombre"
+      placeholder="Seleccione un Perfil"
+      [ngModelOptions]="{ standalone: true }"
+      [style]="{'width':'100%'}"
+      (ngModelChange)="onChangePerfil($event)"
+    ></p-dropdown>
+
+
+
+
+
+
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button
+    type="button"
+    class="p-button-outlined p-button-danger"
+    pButton
+    icon="pi pi-times"
+    label="Cancelar"
+    (click)="display=false"
+  ></button>
+  <button
+    type="button"
+    class="p-button-success"
+    pButton
+    icon="pi pi-check"
+    label="Aceptar"
+    (click)="savePerfil()"
+  ></button>
+  </ng-template>
+</p-dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p-dialog [(visible)]="displayDialogPassword" [style]="{'width':'50%'}" [contentStyle]="{'overflow':'visible'}">
+  <ng-template pTemplate="header">
+      Cambiar Contraseña
+  </ng-template>
+  <form [formGroup]="passwordFormGroup"    >
+
+  <div class="form-grid grid" >
+    <div class="field col-12" >
+      <label>Contraseña:</label>
+
+      <input
+
+      type="password"
+      pInputText
+      formControlName="usuContrasenia"
+      class="inputfield w-full"
+
+      [(ngModel)]="changePasswordModel.usuContrasenia"
+      />
+      <small
+      class="text-danger"
+      *ngIf="
+      passwordFormGroup.controls['usuContrasenia']?.errors
+      "
+    >
+      {{ passwordFormGroup.controls['usuContrasenia'].errorMessage }}</small
+    >
+    </div>
+
+    <div class="field col-12">
+      <label>Confirmar Contraseña:</label>
+
+      <input
+
+      type="password"
+      pInputText
+      formControlName="usuContrasenia2"
+      class="inputfield w-full"
+      [(ngModel)]="changePasswordModel.usuContrasenia2"
+      />
+      <small
+          class="text-danger"
+          *ngIf="
+          passwordFormGroup.controls['usuContrasenia2']?.errors
+          "
+        >
+          {{ passwordFormGroup.controls['usuContrasenia2'].errorMessage }}</small
+        >
+    </div>
+  </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <button
+    type="button"
+    class="p-button-outlined p-button-danger"
+    pButton
+    icon="pi pi-times"
+    label="Cancelar"
+    (click)="display=false"
+  ></button>
+  <button
+    type="button"
+    class="p-button-success"
+    pButton
+    icon="pi pi-check"
+    label="Aceptar"
+    (click)="savePassword()"
+  ></button>
+  </ng-template>
+</p-dialog>
+
+
+<p-confirmDialog #cd [style]="{ width: '50vw' }">
+  <ng-template pTemplate="header">
+    <h3>Guardar Usuario</h3>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      type="button"
+      class="p-button-outlined p-button-danger"
+      pButton
+      icon="pi pi-times"
+      label="Cancelar"
+      (click)="cd.reject()"
+    ></button>
+    <button
+      type="button"
+      class="p-button-success"
+      pButton
+      icon="pi pi-check"
+      label="Aceptar"
+      (click)="cd.accept()"
+    ></button>
+  </ng-template>
+</p-confirmDialog>
