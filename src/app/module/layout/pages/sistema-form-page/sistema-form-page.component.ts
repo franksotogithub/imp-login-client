@@ -130,6 +130,8 @@ export class SistemaFormPageComponent implements OnInit {
         }
 
         else{
+
+          this.sistemaModel.sisLogotipo=null;
           this.sistemaService.sistemaUpdate(this.sistemaModel)?.subscribe((res)=>{
 
 
