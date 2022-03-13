@@ -6,6 +6,9 @@ export const environment = {
   production: true,
   apiUrl:'http://10.0.0.125/apilogin',
   subdominion:'',
+  sisIdAdmin:1,
+  prfIdAdmin:1
+
 };
 
 /*

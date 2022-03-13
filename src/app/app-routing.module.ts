@@ -7,7 +7,7 @@ import { LoginFormComponent } from './module/login/components/login-form/login-f
 const routes: Routes = [
   {
     path: 'login',
-    /*component: LoginFormComponent,*/
+
 
     loadChildren :() => import('./module/login/login.module').then(m=> m.LoginModule),
   },

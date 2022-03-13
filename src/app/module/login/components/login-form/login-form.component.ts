@@ -41,6 +41,17 @@ export class LoginFormComponent implements OnInit {
           console.log(res);
           localStorage.setItem('currentUser', JSON.stringify(res.sesion));
           localStorage.setItem('apps', JSON.stringify(res.apps));
+
+
+
+          let aplicacion = res.apps.find((e) => {
+            return e.sisId == environment.sisIdAdmin && e.prfId == environment.prfIdAdmin;
+          });
+
+
+          let administrador = aplicacion ? '1' : '0';
+          localStorage.setItem('administrador',  administrador);
+
           this.router.navigate(['/']);
         }
       });

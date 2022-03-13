@@ -1,5 +1,8 @@
 export const environment = {
   production: true,
-  apiUrl:'http://10.0.0.125/apilogin',
-  subdominion:'',
+  apiUrl:'http://ogit.imp.gob.pe/apilogin',
+  subdominion:'/sistemas',
+  sisIdAdmin:2,
+  prfIdAdmin:4
+
 };

@@ -9,16 +9,16 @@ import { SessionUI } from '@app/module/login/models/ui/session.ui';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(  private router: Router){}
 
   canActivate(route: ActivatedRouteSnapshot): Promise<boolean>  | boolean{
     let l=localStorage.getItem('currentUser');
-
     const currentUser : SessionUI |null= l?JSON.parse(l):null;
+    const admin =localStorage.getItem('administrador');
+    const administrador = admin&& parseInt(admin)==1? true:false;
 
-
-    if(currentUser){
+    if(currentUser &&  administrador){
       return true;
     }
 
